@@ -8,9 +8,7 @@ class UserAlert(Alert.Alert):
         self.privilege_update = privilege_update
         self.new_privilege = new_privilege
 
-    def alert_banner(self):
-        return "!! ALERT !!\nAlert SEVERITY {}\nAlert ID {}\nAlert Type {}".format(self.alert_severity,self.alert_id,self.alert_type)
 
     def alert_details(self):
-        return "\nProfile Updated {}\nCredentails Updated {}\nPriviledge Changed {}\nPrivilege {}".format(self.profile_update,self.credential_update,self.privilege_update, self.new_privilege)
+        return "\nProfile Updated {}\nCredentails Updated {}\nPriviledge Changed {}\nPrivilege {}\n".format(self.profile_update,self.credential_update,self.privilege_update, self.new_privilege)
 
