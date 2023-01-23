@@ -7,5 +7,9 @@ class NetworkAlert(Alert.Alert):
         self.source_ip = source_ip
         self.destination_ip = destination_ip
         self.device_macaddr = device_macaddr
+
+    def alert_heading(self):
+        return("-----NETWORK ALERT-----\n")
+
     def alert_details(self):
         return("Device ID: {}\nSource IP: {}\nDestination IP: {}\nDevice MAC: {}\n".format(self.device_id,self.source_ip, self.destination_ip,self.device_macaddr))

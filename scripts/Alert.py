@@ -4,4 +4,4 @@ class Alert:
         self.alert_type = alert_type
         self.alert_severity = alert_severity
     def alert_banner(self):
-        return "!! ALERT !!\nAlert SEVERITY {}\nAlert ID {}\nAlert Type {}\n".format(self.alert_severity,self.alert_id,self.alert_type)
+        return "Alert SEVERITY: {}\nAlert ID: {}\nAlert Type: {}\n".format(self.alert_severity,self.alert_id,self.alert_type)

@@ -72,9 +72,13 @@ def generate_network_alert():
     device_macaddr = generate_macaddr()
 
     new_alert = NetworkAlert(id,type,severity,device_id,source_ip,destination_ip,device_macaddr)
+    
+    alert_heading = new_alert.alert_heading()
     alert_banner = new_alert.alert_banner()
     alert_details = new_alert.alert_details()
-    alert_message = alert_banner + alert_details
+    
+    alert_message = alert_heading + alert_banner + alert_details
+
     write_to_file(alert_message, id, alert_folder)
     
 def generate_user_alert():
@@ -89,10 +93,11 @@ def generate_user_alert():
     profile,credential,pirivilege, updated_privilege = generate_user_alert_details()
     new_alert = UserAlert(id,type,severity,profile,credential,pirivilege,updated_privilege)
 
+    alert_heading = new_alert.alert_heading()
     alert_banner = new_alert.alert_banner()
     alert_details = new_alert.alert_details()
 
-    alert_message = alert_banner + alert_details
+    alert_message = alert_heading + alert_banner + alert_details
     write_to_file(alert_message, id, alert_folder)
 
 def main_menu(total_alerts):
