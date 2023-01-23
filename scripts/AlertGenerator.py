@@ -1,6 +1,7 @@
 from datetime import datetime
 import os
 import random
+from random import randint
 import string
 from faker import Faker
 from UserAlert import UserAlert
@@ -36,6 +37,15 @@ def generate_user_alert_details():
     return profile_change,credential_change,privilege_change, updated_privilege
 
 # NETWORK ALERT FUNCTIONS
+def random_with_N_digits(n):
+    range_start = 10**(n-1)
+    range_end = (10**n)-1
+    return randint(range_start, range_end)
+
+def generate_device_id():
+    device_id = random_with_N_digits(15)
+    return device_id
+
 def generate_ipaddr():
     faker = Faker()  
     source_ip = faker.ipv4()  
@@ -57,10 +67,11 @@ def generate_network_alert():
     severity = generate_alert_severity()
     id = generate_alert_id()
     type = generate_alert_type()
+    device_id = generate_device_id()
     source_ip,destination_ip = generate_ipaddr()
     device_macaddr = generate_macaddr()
 
-    new_alert = NetworkAlert(id,type,severity,source_ip,destination_ip,device_macaddr)
+    new_alert = NetworkAlert(id,type,severity,device_id,source_ip,destination_ip,device_macaddr)
     alert_banner = new_alert.alert_banner()
     alert_details = new_alert.alert_details()
     alert_message = alert_banner + alert_details
