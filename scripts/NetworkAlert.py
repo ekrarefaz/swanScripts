@@ -12,4 +12,10 @@ class NetworkAlert(Alert.Alert):
         return("-----NETWORK ALERT-----\n")
 
     def alert_details(self):
-        return("Device ID: {}\nSource IP: {}\nDestination IP: {}\nDevice MAC: {}\n".format(self.device_id,self.source_ip, self.destination_ip,self.device_macaddr))
+        details_dictionary = {
+            "Device ID" : self.device_id,
+            "Source IP": self.source_ip,
+            "Destination IP":self.destination_ip,
+            "Device MAC":self.device_macaddr
+        }
+        return details_dictionary

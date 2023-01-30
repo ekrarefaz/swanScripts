@@ -1,6 +1,8 @@
 from datetime import datetime
 import os
+import uuid
 import random
+import json
 from random import randint
 import string
 from faker import Faker
@@ -77,9 +79,11 @@ def generate_network_alert():
     alert_banner = new_alert.alert_banner()
     alert_details = new_alert.alert_details()
     
-    alert_message = alert_heading + alert_banner + alert_details
+    convert_to_json(alert_banner,alert_details)
 
-    write_to_file(alert_message, id, alert_folder)
+    # alert_message = alert_heading + alert_banner + alert_details
+
+    # write_to_file(alert_message, id, alert_folder)
     
 def generate_user_alert():
 
@@ -97,8 +101,9 @@ def generate_user_alert():
     alert_banner = new_alert.alert_banner()
     alert_details = new_alert.alert_details()
 
-    alert_message = alert_heading + alert_banner + alert_details
-    write_to_file(alert_message, id, alert_folder)
+    convert_to_json(alert_banner,alert_details)
+    # alert_message = alert_heading + alert_banner + alert_details
+    # write_to_file(alert_message, id, alert_folder)
 
 def main_menu(total_alerts):
     selection = int(input("Select the type of Alert:\n1.User Alert\n2.Network Alert\n"))
@@ -112,10 +117,22 @@ def main_menu(total_alerts):
         case _:
             print("ERROR 404")
         
-def write_to_file(alert_message, id, alert_folder):
-    filename = alert_folder + "Alert-{}".format(id)
-    with open(filename, "w") as file:
-        file.write(alert_message)
+def convert_to_json(alert_banner,alert_details):
+    alert_banner.update(alert_details)
+    alert_folder = "/Users/ekrar/SwanForesight/scripts/data"
+    id = uuid.uuid1()  
+    filename = alert_folder + "Alert-{}.json".format(id)
+ 
+    with open(filename,"w") as outfile:
+        json.dump(alert_banner, outfile)
+
+# def write_to_file(banner_json, details_json):
+#     alert_folder = "/Users/ekrar/SwanForesight/scripts/data"
+#     id = uuid.uuid1()
+#     print(id)
+#     filename = alert_folder + "Alert-{}".format(id)
+#     with open(filename, "a") as file:
+        
 
 def main():
     total_alerts = int(input("Enter the number of Alerts to Generate: "))
